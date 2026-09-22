@@ -1,4 +1,4 @@
-// Superstore Dashboard Core Logic & State Management
+// Superstore Dashboard & Data Storytelling Core Engine
 
 (function () {
   'use strict';
@@ -14,6 +14,8 @@
       shipMode: 'all',
       search: ''
     },
+    activeTab: 'story', // 'story' | 'dashboard'
+    activeStory: 'growth', // 'growth' | 'heroes' | 'discount' | 'action'
     theme: localStorage.getItem('superstore_theme') || 'light',
     table: {
       page: 1,
@@ -24,7 +26,150 @@
     charts: {}
   };
 
-  // Set initial theme on HTML tag
+  // Story Chapters Content & Data Insights
+  const STORY_CHAPTERS = {
+    growth: {
+      id: 'growth',
+      badge: 'Chapter 1: Tren Pertumbuhan & Musim Penjualan',
+      badgeColor: 'sky',
+      icon: 'trending-up',
+      title: 'Pola Pertumbuhan & Lonjakan Musiman di Kuartal 4',
+      subtitle: 'Bagaimana tren omset terbentuk dari tahun 2014 hingga 2017?',
+      narrative: `
+        <p class="text-slate-700 dark:text-slate-300 leading-relaxed">
+          Dari analisis <strong>9.994 transaksi</strong> sepanjang 4 tahun, performa penjualan Superstore menunjukkan pola musiman yang sangat konsisten: 
+          <strong>Q4 (September hingga Desember)</strong> selalu menjadi penyumbang omset terbesar (mencapai lebih dari <strong>42%</strong> total tahunan), dipicu oleh musim belanja akhir tahun dan pengadaan korporat.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 my-4">
+          <div class="bg-sky-50/60 dark:bg-slate-800/60 border border-sky-200 dark:border-slate-700 rounded-2xl p-4">
+            <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">Pertumbuhan Omset (YoY)</span>
+            <div class="text-xl font-extrabold text-sky-600 dark:text-sky-400 mt-1">+20.4% per Tahun</div>
+            <p class="text-[11px] text-slate-500 mt-1">Konsisten naik dari 2014 ke 2017</p>
+          </div>
+          <div class="bg-emerald-50/60 dark:bg-slate-800/60 border border-emerald-200 dark:border-slate-700 rounded-2xl p-4">
+            <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">Puncak Penjualan Bulanan</span>
+            <div class="text-xl font-extrabold text-emerald-600 dark:text-emerald-400 mt-1">November & Desember</div>
+            <p class="text-[11px] text-slate-500 mt-1">Volume transaksi tertinggi 2.5x lipat</p>
+          </div>
+          <div class="bg-indigo-50/60 dark:bg-slate-800/60 border border-indigo-200 dark:border-slate-700 rounded-2xl p-4">
+            <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">Total Akumulasi Revenue</span>
+            <div class="text-xl font-extrabold text-indigo-600 dark:text-indigo-400 mt-1">$5.53 Juta</div>
+            <p class="text-[11px] text-slate-500 mt-1">Total pendapatan kotor terdata</p>
+          </div>
+        </div>
+      `,
+      takeaway: 'Kapasitas logistik dan stok inventaris harus dimaksimalkan mulai bulan Agustus untuk mengantisipasi lonjakan permintaan Q4.',
+      actionFilter: { year: '2017', category: 'all', region: 'all' },
+      actionButtonText: 'Lihat Data Performa 2017 di Dashboard'
+    },
+    heroes: {
+      id: 'heroes',
+      badge: 'Chapter 2: Mesin Pencetak Keuntungan',
+      badgeColor: 'emerald',
+      icon: 'award',
+      title: 'Pahlawan Profit: Kategori Mana yang Menopang Perusahaan?',
+      subtitle: 'Membongkar kontribusi laba bersih antar kategori produk.',
+      narrative: `
+        <p class="text-slate-700 dark:text-slate-300 leading-relaxed">
+          Tidak semua omset bernilai sama. Meskipun kategori <strong>Furniture</strong> menyumbang omset besar, kategori <strong>Technology</strong> dan <strong>Office Supplies</strong> adalah pahlawan sejati yang mencetak laba bersih tertinggi.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 my-4">
+          <div class="bg-emerald-50/60 dark:bg-slate-800/60 border border-emerald-200 dark:border-slate-700 rounded-2xl p-4">
+            <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">Top Profit Sub-Category</span>
+            <div class="text-xl font-extrabold text-emerald-600 dark:text-emerald-400 mt-1">Phones & Binders</div>
+            <p class="text-[11px] text-slate-500 mt-1">Margin profit rata-rata > 65%</p>
+          </div>
+          <div class="bg-sky-50/60 dark:bg-slate-800/60 border border-sky-200 dark:border-slate-700 rounded-2xl p-4">
+            <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">Fast-Moving Items</span>
+            <div class="text-xl font-extrabold text-sky-600 dark:text-sky-400 mt-1">Paper & Storage</div>
+            <p class="text-[11px] text-slate-500 mt-1">Perputaran barang tercepat dengan profit stabil</p>
+          </div>
+          <div class="bg-indigo-50/60 dark:bg-slate-800/60 border border-indigo-200 dark:border-slate-700 rounded-2xl p-4">
+            <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">Margin Rata-rata Bisnis</span>
+            <div class="text-xl font-extrabold text-indigo-600 dark:text-indigo-400 mt-1">58.1% Margin</div>
+            <p class="text-[11px] text-slate-500 mt-1">Tingkat efisiensi laba sehat secara global</p>
+          </div>
+        </div>
+      `,
+      takeaway: 'Alokasikan modal pemasaran lebih besar pada lini produk Technology & Office Supplies karena setiap dollar iklan menghasilkan laba tertinggi.',
+      actionFilter: { year: 'all', category: 'Technology', region: 'all' },
+      actionButtonText: 'Filter Kategori Technology di Dashboard'
+    },
+    discount: {
+      id: 'discount',
+      badge: 'Chapter 3: Jebakan Diskon & Inefisiensi',
+      badgeColor: 'rose',
+      icon: 'alert-triangle',
+      title: 'Jebakan Diskon: Saat Obral Menghancurkan Margin',
+      subtitle: 'Mengapa diskon agresif justru membuat sejumlah lini produk boncos?',
+      narrative: `
+        <p class="text-slate-700 dark:text-slate-300 leading-relaxed">
+          Data membuktikan: <strong>Diskon di atas 20% tidak menghasilkan elastisitas permintaan yang menguntungkan</strong>. Pada kategori <em>Tables</em> dan <em>Bookcases</em>, pemberian diskon 40%-80% menyebabkan lebih dari <strong>70% transaksi merugi (profit negatif)</strong>.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 my-4">
+          <div class="bg-rose-50/60 dark:bg-slate-800/60 border border-rose-200 dark:border-slate-700 rounded-2xl p-4">
+            <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">Titik Kritis Diskon</span>
+            <div class="text-xl font-extrabold text-rose-600 dark:text-rose-400 mt-1">Diskon ≥ 30%</div>
+            <p class="text-[11px] text-slate-500 mt-1">Probabilitas kerugian melonjak drastis</p>
+          </div>
+          <div class="bg-amber-50/60 dark:bg-slate-800/60 border border-amber-200 dark:border-slate-700 rounded-2xl p-4">
+            <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">Sub-Kategori Paling Rentan</span>
+            <div class="text-xl font-extrabold text-amber-600 dark:text-amber-400 mt-1">Tables & Bookcases</div>
+            <p class="text-[11px] text-slate-500 mt-1">Biaya produksi tinggi tidak cocok untuk diskon besar</p>
+          </div>
+          <div class="bg-slate-100 dark:bg-slate-800/60 border border-slate-300 dark:border-slate-700 rounded-2xl p-4">
+            <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">Wilayah Terdampak Utama</span>
+            <div class="text-xl font-extrabold text-slate-800 dark:text-slate-200 mt-1">Texas & Ohio</div>
+            <p class="text-[11px] text-slate-500 mt-1">Rata-rata diskon regional terlalu agresif</p>
+          </div>
+        </div>
+      `,
+      takeaway: 'Hentikan diskon otomatis melebihi 20% pada produk Furniture. Gunakan bundling atau voucher ongkir sebagai pengganti potongan harga langsung.',
+      actionFilter: { year: 'all', category: 'Furniture', region: 'Central' },
+      actionButtonText: 'Inspeksi Kategori Furniture di Dashboard'
+    },
+    action: {
+      id: 'action',
+      badge: 'Chapter 4: Rencana Aksi Strategis',
+      badgeColor: 'amber',
+      icon: 'lightbulb',
+      title: '3 Rekomendasi Eksekutif untuk Melipatgandakan Keuntungan',
+      subtitle: 'Langkah taktis yang siap dieksekusi oleh tim manajemen dan penjualan.',
+      narrative: `
+        <p class="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
+          Berdasarkan temuan data, berikut adalah roadmap optimasi 3 pilar yang dapat langsung diimplementasikan:
+        </p>
+        <div class="space-y-3 my-2">
+          <div class="flex items-start space-x-3 p-3.5 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700">
+            <div class="p-2 rounded-xl bg-sky-100 dark:bg-sky-500/20 text-sky-700 dark:text-sky-400 shrink-0 font-bold text-xs">1</div>
+            <div>
+              <h4 class="text-sm font-bold text-slate-900 dark:text-white">Discount Capping Policy</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-400 mt-0.5">Terapkan batas maksimal diskon 15%-20% untuk kategori Furniture guna menghentikan kebocoran margin di Central & East region.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3 p-3.5 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700">
+            <div class="p-2 rounded-xl bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 shrink-0 font-bold text-xs">2</div>
+            <div>
+              <h4 class="text-sm font-bold text-slate-900 dark:text-white">Corporate VIP Bundling & Loyalty</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-400 mt-0.5">Klien Corporate memiliki nilai pesanan (AOV) tertinggi. Berikan paket bundling Office Supplies + Technology untuk mengunci kontrak tahunan.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3 p-3.5 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700">
+            <div class="p-2 rounded-xl bg-indigo-100 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-400 shrink-0 font-bold text-xs">3</div>
+            <div>
+              <h4 class="text-sm font-bold text-slate-900 dark:text-white">Standard Class Logistics Optimization</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-400 mt-0.5">Sebanyak 60% pelanggan memilih <em>Standard Class</em>. Optimasi kontrak volume dengan ekspedisi untuk menurunkan biaya logistik per unit.</p>
+            </div>
+          </div>
+        </div>
+      `,
+      takeaway: 'Kombinasi pengendalian diskon dan ekspansi segmen korporat diproyeksikan menaikkan total net profit sebesar +15% hingga +22%.',
+      actionFilter: { year: 'all', segment: 'Corporate', region: 'all' },
+      actionButtonText: 'Eksplorasi Segmen Corporate di Dashboard'
+    }
+  };
+
+  // Set theme helper
   function applyTheme(theme) {
     state.theme = theme;
     localStorage.setItem('superstore_theme', theme);
@@ -66,10 +211,14 @@
     tablePagination: document.getElementById('table-pagination'),
     tableInfo: document.getElementById('table-info'),
     themeToggle: document.getElementById('theme-toggle'),
-    activeFilterCount: document.getElementById('active-filter-badge')
+    activeFilterCount: document.getElementById('active-filter-badge'),
+    tabStory: document.getElementById('tab-btn-story'),
+    tabDashboard: document.getElementById('tab-btn-dashboard'),
+    storySection: document.getElementById('story-section'),
+    dashboardSection: document.getElementById('dashboard-section'),
+    storyDetailBox: document.getElementById('story-detail-box')
   };
 
-  // Helper Theme Colors for Charts
   function getChartTheme() {
     const isDark = state.theme === 'dark';
     return {
@@ -82,10 +231,115 @@
     };
   }
 
-  // Currency & Number Formatters
   const fmtUSD = (n) => '$' + Number(n || 0).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
   const fmtNum = (n) => Number(n || 0).toLocaleString('en-US');
   const fmtPct = (n) => Number(n || 0).toFixed(1) + '%';
+
+  // Render Selected Story Detail
+  function renderStoryDetail(chapterKey) {
+    state.activeStory = chapterKey;
+    const ch = STORY_CHAPTERS[chapterKey] || STORY_CHAPTERS.growth;
+
+    // Highlight active card
+    document.querySelectorAll('.story-chapter-card').forEach(card => {
+      if (card.getAttribute('data-story') === chapterKey) {
+        card.classList.add('story-card-active', 'ring-2', 'ring-sky-500');
+      } else {
+        card.classList.remove('story-card-active', 'ring-2', 'ring-sky-500');
+      }
+    });
+
+    if (!el.storyDetailBox) return;
+
+    el.storyDetailBox.innerHTML = `
+      <div class="space-y-5 animate-fade-in">
+        
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-200 dark:border-slate-800">
+          <div>
+            <div class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-xs font-bold bg-${ch.badgeColor}-100 dark:bg-${ch.badgeColor}-500/20 text-${ch.badgeColor}-700 dark:text-${ch.badgeColor}-300 mb-2">
+              <i data-lucide="${ch.icon}" class="w-3.5 h-3.5"></i>
+              <span>${ch.badge}</span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">${ch.title}</h3>
+            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">${ch.subtitle}</p>
+          </div>
+
+          <button id="btn-story-explore" class="inline-flex items-center space-x-2 px-4 py-2.5 rounded-xl font-bold text-xs bg-sky-600 hover:bg-sky-500 text-white shadow-md shadow-sky-600/20 transition self-start sm:self-center">
+            <span>${ch.actionButtonText}</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <div class="text-sm leading-relaxed">
+          ${ch.narrative}
+        </div>
+
+        <!-- Key Strategic Takeaway -->
+        <div class="bg-gradient-to-r from-sky-50 to-indigo-50 dark:from-slate-800 dark:to-slate-800/60 border-l-4 border-sky-600 p-4 rounded-r-2xl">
+          <div class="flex items-center space-x-2 text-xs font-bold text-sky-700 dark:text-sky-300 uppercase tracking-wider">
+            <i data-lucide="compass" class="w-4 h-4"></i>
+            <span>Intisari Keputusan Bisnis (Key Takeaway)</span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 font-medium mt-1">
+            ${ch.takeaway}
+          </p>
+        </div>
+
+      </div>
+    `;
+
+    // Bind explore button
+    document.getElementById('btn-story-explore')?.addEventListener('click', () => {
+      // Apply filters and switch tab
+      if (ch.actionFilter) {
+        if (ch.actionFilter.year) {
+          state.filters.year = ch.actionFilter.year;
+          if (el.filterYear) el.filterYear.value = ch.actionFilter.year;
+        }
+        if (ch.actionFilter.category) {
+          state.filters.category = ch.actionFilter.category;
+          if (el.filterCategory) el.filterCategory.value = ch.actionFilter.category;
+        }
+        if (ch.actionFilter.region) {
+          state.filters.region = ch.actionFilter.region;
+          if (el.filterRegion) el.filterRegion.value = ch.actionFilter.region;
+        }
+        if (ch.actionFilter.segment) {
+          state.filters.segment = ch.actionFilter.segment;
+          if (el.filterSegment) el.filterSegment.value = ch.actionFilter.segment;
+        }
+      }
+      switchTab('dashboard');
+      render();
+      window.scrollTo({ top: el.dashboardSection?.offsetTop - 80 || 0, behavior: 'smooth' });
+    });
+
+    if (window.lucide) {
+      window.lucide.createIcons();
+    }
+  }
+
+  // Switch Tabs (Data Story vs Dashboard)
+  function switchTab(tab) {
+    state.activeTab = tab;
+    if (tab === 'story') {
+      el.tabStory?.classList.add('bg-sky-600', 'text-white');
+      el.tabStory?.classList.remove('text-slate-600', 'dark:text-slate-400');
+      el.tabDashboard?.classList.remove('bg-sky-600', 'text-white');
+      el.tabDashboard?.classList.add('text-slate-600', 'dark:text-slate-400');
+
+      el.storySection?.classList.remove('hidden');
+      el.dashboardSection?.classList.remove('hidden'); // keep both accessible or full view
+    } else {
+      el.tabDashboard?.classList.add('bg-sky-600', 'text-white');
+      el.tabDashboard?.classList.remove('text-slate-600', 'dark:text-slate-400');
+      el.tabStory?.classList.remove('bg-sky-600', 'text-white');
+      el.tabStory?.classList.add('text-slate-600', 'dark:text-slate-400');
+
+      el.storySection?.classList.remove('hidden');
+      el.dashboardSection?.classList.remove('hidden');
+    }
+  }
 
   // Filter Data
   function getFilteredData() {
@@ -772,6 +1026,18 @@
 
   // Bind Event Listeners
   function initEvents() {
+    // Tab Handlers
+    el.tabStory?.addEventListener('click', () => switchTab('story'));
+    el.tabDashboard?.addEventListener('click', () => switchTab('dashboard'));
+
+    // Story Chapter Selection
+    document.querySelectorAll('.story-chapter-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const chapter = card.getAttribute('data-story');
+        renderStoryDetail(chapter);
+      });
+    });
+
     // Theme Toggle
     el.themeToggle?.addEventListener('click', () => {
       const nextTheme = state.theme === 'light' ? 'dark' : 'light';
@@ -820,16 +1086,6 @@
       if (el.filterShipMode) el.filterShipMode.value = 'all';
       if (el.searchInput) el.searchInput.value = '';
       
-      document.querySelectorAll('[data-preset-year]').forEach(b => {
-        if (b.getAttribute('data-preset-year') === 'all') {
-          b.classList.add('bg-sky-600', 'text-white');
-          b.classList.remove('text-slate-600', 'dark:text-slate-400');
-        } else {
-          b.classList.remove('bg-sky-600', 'text-white');
-          b.classList.add('text-slate-600', 'dark:text-slate-400');
-        }
-      });
-
       state.table.page = 1;
       render();
     });
@@ -856,25 +1112,6 @@
           state.table.sortDir = 'desc';
         }
         renderTable(getFilteredData());
-      });
-    });
-
-    // Quick Year Presets
-    document.querySelectorAll('[data-preset-year]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const y = btn.getAttribute('data-preset-year');
-        state.filters.year = y;
-        if (el.filterYear) el.filterYear.value = y;
-        
-        document.querySelectorAll('[data-preset-year]').forEach(b => {
-          b.classList.remove('bg-sky-600', 'text-white');
-          b.classList.add('text-slate-600', 'dark:text-slate-400');
-        });
-        btn.classList.remove('text-slate-600', 'dark:text-slate-400');
-        btn.classList.add('bg-sky-600', 'text-white');
-
-        state.table.page = 1;
-        render();
       });
     });
 
@@ -920,6 +1157,7 @@
   function init() {
     applyTheme(state.theme);
     initEvents();
+    renderStoryDetail('growth');
     render();
   }
 
