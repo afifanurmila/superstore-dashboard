@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Superstore Executive Analytics & Data Storytelling</title>
+  <title>Kisah Data Superstore - Cerita Bisnis yang Mudah Dipahami</title>
   
   <!-- Plus Jakarta Sans & JetBrains Mono Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -98,45 +98,45 @@
         <!-- Logo & Title -->
         <div class="flex items-center space-x-3">
           <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center shadow-md shadow-sky-500/20 ring-1 ring-white/30">
-            <i data-lucide="book-open-check" class="w-5 h-5 text-white"></i>
+            <i data-lucide="store" class="w-5 h-5 text-white"></i>
           </div>
           <div>
             <div class="flex items-center space-x-2">
               <h1 class="text-base sm:text-lg font-bold tracking-tight text-slate-900 dark:text-white">
-                Superstore Analytics Pro
+                Superstore Analytics
               </h1>
-              <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-sky-100 dark:bg-sky-500/10 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/20">
-                Data Storytelling
+              <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20">
+                Data Bercerita
               </span>
             </div>
-            <p class="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">Executive Insights & Strategic Narrative Dashboard</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">Melihat Rahasia di Balik Penjualan & Keuntungan Toko</p>
           </div>
         </div>
 
         <!-- View Switcher & Action Controls -->
         <div class="flex items-center space-x-2 sm:space-x-3">
           
-          <!-- Tab Navigation (Overview vs Storytelling) -->
+          <!-- Tab Navigation (Cerita Data vs Grafik Lengkap) -->
           <div class="flex items-center p-1 bg-slate-100 dark:bg-slate-950/80 rounded-xl border border-slate-200 dark:border-slate-800 text-xs">
-            <button id="tab-btn-story" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg font-semibold bg-sky-600 text-white shadow-sm transition">
+            <button id="tab-btn-story" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg font-bold bg-sky-600 text-white shadow-sm transition">
               <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
-              <span>Data Story</span>
+              <span>📖 Cerita Data</span>
             </button>
-            <button id="tab-btn-dashboard" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition">
-              <i data-lucide="layout-dashboard" class="w-3.5 h-3.5"></i>
-              <span>Dashboard</span>
+            <button id="tab-btn-dashboard" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg font-bold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition">
+              <i data-lucide="bar-chart-2" class="w-3.5 h-3.5"></i>
+              <span>📊 Dashboard Grafik</span>
             </button>
           </div>
 
           <!-- Theme Toggle Button -->
-          <button id="theme-toggle" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition" title="Ganti Tema (Light / Dark)">
+          <button id="theme-toggle" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition" title="Ganti Mode Terang / Gelap">
             <i id="theme-icon" data-lucide="moon" class="w-4 h-4"></i>
           </button>
 
           <!-- Export CSV -->
           <button id="btn-export-csv" class="hidden sm:inline-flex items-center space-x-2 px-3.5 py-2 text-xs font-semibold rounded-xl bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition shadow-sm">
             <i data-lucide="download" class="w-3.5 h-3.5"></i>
-            <span>Export CSV</span>
+            <span>Unduh Excel (CSV)</span>
           </button>
         </div>
 
@@ -155,36 +155,36 @@
       <!-- Story Header Hero Card -->
       <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-900 via-sky-900 to-slate-900 text-white p-6 sm:p-8 shadow-xl">
         <div class="relative z-10 max-w-3xl space-y-3">
-          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-sky-500/20 text-sky-300 border border-sky-400/30 text-xs font-semibold uppercase tracking-wider">
-            <i data-lucide="presentation" class="w-3.5 h-3.5"></i>
-            <span>Executive Business Narrative</span>
+          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-sky-500/20 text-sky-300 border border-sky-400/30 text-xs font-bold uppercase tracking-wider">
+            <i data-lucide="message-square-heart" class="w-3.5 h-3.5"></i>
+            <span>Cerita Sederhana di Balik Angka</span>
           </div>
-          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight">
-            Kisah Pertumbuhan Superstore: Kemenangan Omset & Misteri Kebocoran Margin
+          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-tight">
+            Cerita di Balik Toko Superstore: Mana yang Bikin Cuan, Mana yang Bikin Boncos?
           </h2>
-          <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
-            Menelusuri 9.994 transaksi ritel (2014–2017) untuk mengungkap strategi mana yang mendorong profitabilitas, jebakan diskon yang menggerus laba, serta 3 langkah taktis untuk melipatgandakan keuntungan.
+          <p class="text-sm sm:text-base text-slate-200 leading-relaxed font-normal">
+            Mari kita pelajari 9.994 catatan transaksi selama 4 tahun dengan bahasa yang santai. Kita lihat kapan toko paling laris, barang apa yang paling menguntungkan, dan kenapa obral diskon besar-besaran justru bisa bikin tekor.
           </p>
         </div>
         <!-- Decorative Glow -->
         <div class="absolute -right-12 -bottom-12 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
       </div>
 
-      <!-- Story Chapters (Interactive Stepper / Narrative Cards) -->
+      <!-- Story Chapters (Interactive Stepper Cards) -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         
         <!-- Chapter 1 -->
         <div class="story-chapter-card bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm hover:shadow-md transition cursor-pointer group" data-story="growth">
           <div class="flex items-center justify-between">
-            <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-sky-100 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400">Chapter 1</span>
-            <i data-lucide="trending-up" class="w-4 h-4 text-sky-600 dark:text-sky-400 group-hover:scale-110 transition"></i>
+            <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-sky-100 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400">Cerita 1</span>
+            <i data-lucide="calendar" class="w-4 h-4 text-sky-600 dark:text-sky-400 group-hover:scale-110 transition"></i>
           </div>
-          <h3 class="mt-3 text-base font-bold text-slate-900 dark:text-white">Tren & Seasonality</h3>
+          <h3 class="mt-3 text-base font-bold text-slate-900 dark:text-white">Kapan Toko Paling Ramai?</h3>
           <p class="mt-1 text-xs text-slate-500 dark:text-slate-400 line-clamp-2">
-            Penjualan melonjak tajam setiap Q4 (September-Desember).
+            Penjualan selalu meledak di akhir tahun (September - Desember).
           </p>
-          <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 text-[11px] font-semibold text-sky-600 dark:text-sky-400 flex items-center space-x-1">
-            <span>Baca narasi</span>
+          <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 text-[11px] font-bold text-sky-600 dark:text-sky-400 flex items-center space-x-1">
+            <span>Buka cerita</span>
             <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
           </div>
         </div>
@@ -192,15 +192,15 @@
         <!-- Chapter 2 -->
         <div class="story-chapter-card bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm hover:shadow-md transition cursor-pointer group" data-story="heroes">
           <div class="flex items-center justify-between">
-            <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-emerald-100 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-400">Chapter 2</span>
-            <i data-lucide="award" class="w-4 h-4 text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition"></i>
+            <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-emerald-100 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-400">Cerita 2</span>
+            <i data-lucide="trophy" class="w-4 h-4 text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition"></i>
           </div>
-          <h3 class="mt-3 text-base font-bold text-slate-900 dark:text-white">Pahlawan Profit</h3>
+          <h3 class="mt-3 text-base font-bold text-slate-900 dark:text-white">Si Juara Pembawa Untung</h3>
           <p class="mt-1 text-xs text-slate-500 dark:text-slate-400 line-clamp-2">
-            Kategori Technology & Office Supplies menjadi motor utama laba.
+            Barang elektronik & perlengkapan kantor menyumbang untung bersih terbesar.
           </p>
-          <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 flex items-center space-x-1">
-            <span>Baca narasi</span>
+          <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 text-[11px] font-bold text-emerald-600 dark:text-emerald-400 flex items-center space-x-1">
+            <span>Buka cerita</span>
             <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
           </div>
         </div>
@@ -208,15 +208,15 @@
         <!-- Chapter 3 -->
         <div class="story-chapter-card bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm hover:shadow-md transition cursor-pointer group" data-story="discount">
           <div class="flex items-center justify-between">
-            <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-rose-100 dark:bg-rose-500/15 text-rose-700 dark:text-rose-400">Chapter 3</span>
-            <i data-lucide="alert-triangle" class="w-4 h-4 text-rose-600 dark:text-rose-400 group-hover:scale-110 transition"></i>
+            <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-rose-100 dark:bg-rose-500/15 text-rose-700 dark:text-rose-400">Cerita 3</span>
+            <i data-lucide="alert-octagon" class="w-4 h-4 text-rose-600 dark:text-rose-400 group-hover:scale-110 transition"></i>
           </div>
-          <h3 class="mt-3 text-base font-bold text-slate-900 dark:text-white">Jebakan Diskon</h3>
+          <h3 class="mt-3 text-base font-bold text-slate-900 dark:text-white">Jebakan Diskon & Obral</h3>
           <p class="mt-1 text-xs text-slate-500 dark:text-slate-400 line-clamp-2">
-            Diskon ≥30% menghancurkan margin, terutama di kategori Furniture.
+            Obral diskon di atas 30% justru bikin nombok, terutama untuk meja & lemari.
           </p>
-          <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 text-[11px] font-semibold text-rose-600 dark:text-rose-400 flex items-center space-x-1">
-            <span>Baca narasi</span>
+          <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 text-[11px] font-bold text-rose-600 dark:text-rose-400 flex items-center space-x-1">
+            <span>Buka cerita</span>
             <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
           </div>
         </div>
@@ -224,15 +224,15 @@
         <!-- Chapter 4 -->
         <div class="story-chapter-card bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm hover:shadow-md transition cursor-pointer group" data-story="action">
           <div class="flex items-center justify-between">
-            <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-amber-100 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400">Chapter 4</span>
-            <i data-lucide="lightbulb" class="w-4 h-4 text-amber-600 dark:text-amber-400 group-hover:scale-110 transition"></i>
+            <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-amber-100 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400">Cerita 4</span>
+            <i data-lucide="check-circle-2" class="w-4 h-4 text-amber-600 dark:text-amber-400 group-hover:scale-110 transition"></i>
           </div>
-          <h3 class="mt-3 text-base font-bold text-slate-900 dark:text-white">Rekomendasi Aksi</h3>
+          <h3 class="mt-3 text-base font-bold text-slate-900 dark:text-white">3 Solusi Gampang</h3>
           <p class="mt-1 text-xs text-slate-500 dark:text-slate-400 line-clamp-2">
-            3 Langkah konkret menaikkan margin hingga +18% di tahun berikutnya.
+            Langkah praktis yang bisa langsung dikerjakan pemilik toko untuk melipatgandakan untung.
           </p>
-          <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 text-[11px] font-semibold text-amber-600 dark:text-amber-400 flex items-center space-x-1">
-            <span>Baca narasi</span>
+          <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 text-[11px] font-bold text-amber-600 dark:text-amber-400 flex items-center space-x-1">
+            <span>Buka cerita</span>
             <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
           </div>
         </div>
@@ -255,10 +255,10 @@
       <section class="bg-white dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-4 sm:p-5 shadow-sm">
         <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
           
-          <div class="flex items-center space-x-2 text-sm font-semibold text-slate-800 dark:text-slate-300">
-            <i data-lucide="sliders-horizontal" class="w-4 h-4 text-sky-600 dark:text-sky-400"></i>
-            <span>Filter Data Interaktif</span>
-            <span id="active-filter-badge" class="hidden text-[11px] px-2 py-0.5 rounded-full bg-sky-100 dark:bg-sky-500/20 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-500/30">
+          <div class="flex items-center space-x-2 text-sm font-bold text-slate-800 dark:text-slate-300">
+            <i data-lucide="filter" class="w-4 h-4 text-sky-600 dark:text-sky-400"></i>
+            <span>Pilih Saringan Data (Filter)</span>
+            <span id="active-filter-badge" class="hidden text-[11px] px-2 py-0.5 rounded-full bg-sky-100 dark:bg-sky-500/20 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-500/30 font-semibold">
               0 filter aktif
             </span>
           </div>
@@ -267,7 +267,7 @@
             
             <!-- Year Select -->
             <div>
-              <label class="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">Tahun Order</label>
+              <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-400 mb-1">Pilih Tahun</label>
               <select id="filter-year" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-sky-500 transition">
                 <option value="all">Semua Tahun</option>
                 <option value="2014">2014</option>
@@ -279,43 +279,43 @@
 
             <!-- Region Select -->
             <div>
-              <label class="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">Wilayah / Region</label>
+              <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-400 mb-1">Wilayah / Daerah</label>
               <select id="filter-region" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-sky-500 transition">
-                <option value="all">Semua Region</option>
-                <option value="Central">Central</option>
-                <option value="East">East</option>
-                <option value="South">South</option>
-                <option value="West">West</option>
+                <option value="all">Semua Wilayah</option>
+                <option value="Central">Pusat (Central)</option>
+                <option value="East">Timur (East)</option>
+                <option value="South">Selatan (South)</option>
+                <option value="West">Barat (West)</option>
               </select>
             </div>
 
             <!-- Segment Select -->
             <div>
-              <label class="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">Segmen Customer</label>
+              <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-400 mb-1">Tipe Pembeli</label>
               <select id="filter-segment" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-sky-500 transition">
-                <option value="all">Semua Segmen</option>
-                <option value="Consumer">Consumer</option>
-                <option value="Corporate">Corporate</option>
-                <option value="Home Office">Home Office</option>
+                <option value="all">Semua Pembeli</option>
+                <option value="Consumer">Perorangan (Consumer)</option>
+                <option value="Corporate">Perusahaan (Corporate)</option>
+                <option value="Home Office">Kantor Rumahan (Home Office)</option>
               </select>
             </div>
 
             <!-- Category Select -->
             <div>
-              <label class="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">Kategori Produk</label>
+              <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-400 mb-1">Jenis Barang</label>
               <select id="filter-category" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-sky-500 transition">
-                <option value="all">Semua Kategori</option>
-                <option value="Furniture">Furniture</option>
-                <option value="Office Supplies">Office Supplies</option>
-                <option value="Technology">Technology</option>
+                <option value="all">Semua Jenis</option>
+                <option value="Furniture">Perabotan (Furniture)</option>
+                <option value="Office Supplies">Alat Tulis Kantor</option>
+                <option value="Technology">Elektronik & Teknologi</option>
               </select>
             </div>
 
             <!-- Reset Button -->
             <div class="col-span-2 sm:col-span-1 flex items-end">
-              <button id="btn-reset-filters" class="w-full inline-flex items-center justify-center space-x-1.5 px-3 py-2 text-xs font-semibold rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 transition">
+              <button id="btn-reset-filters" class="w-full inline-flex items-center justify-center space-x-1.5 px-3 py-2 text-xs font-bold rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 transition">
                 <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
-                <span>Reset Filter</span>
+                <span>Kembalikan Semua</span>
               </button>
             </div>
 
@@ -329,27 +329,27 @@
         <div class="p-2 bg-sky-500/15 rounded-xl text-sky-600 dark:text-sky-400 shrink-0 mt-0.5 border border-sky-300 dark:border-sky-500/20">
           <i data-lucide="sparkles" class="w-4 h-4"></i>
         </div>
-        <div id="ai-insight-text" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-          Memuat analisis ringkas...
+        <div id="ai-insight-text" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
+          Memuat ringkasan data...
         </div>
       </section>
 
-      <!-- KPI Scorecards Grid -->
+      <!-- KPI Scorecards Grid (5 Kartu Angka Utama) -->
       <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         
         <!-- Card 1: Total Sales -->
         <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 hover:border-slate-300 dark:hover:border-slate-700 transition relative overflow-hidden group shadow-sm">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Total Revenue (Sales)</span>
+            <span class="text-xs font-bold text-slate-500 dark:text-slate-400">Total Uang Masuk (Omset)</span>
             <div class="p-2 rounded-xl bg-sky-50 dark:bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-200 dark:border-sky-500/20 group-hover:scale-110 transition-transform">
-              <i data-lucide="dollar-sign" class="w-4 h-4"></i>
+              <i data-lucide="wallet" class="w-4 h-4"></i>
             </div>
           </div>
           <div class="mt-3">
-            <div id="kpi-total-sales" class="text-2xl lg:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">-</div>
+            <div id="kpi-total-sales" class="text-2xl lg:text-3xl font-black tracking-tight text-slate-900 dark:text-white">-</div>
             <div class="mt-1 flex items-center text-xs text-slate-500 dark:text-slate-400 space-x-1">
-              <span class="text-sky-600 dark:text-sky-400 font-semibold">Omset Kotor</span>
-              <span>seluruh transaksi</span>
+              <span class="text-sky-600 dark:text-sky-400 font-bold">Total Penjualan</span>
+              <span>dari semua nota</span>
             </div>
           </div>
         </div>
@@ -357,16 +357,16 @@
         <!-- Card 2: Total Net Profit -->
         <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 hover:border-slate-300 dark:hover:border-slate-700 transition relative overflow-hidden group shadow-sm">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Total Net Profit</span>
+            <span class="text-xs font-bold text-slate-500 dark:text-slate-400">Untung Bersih (Profit)</span>
             <div class="p-2 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20 group-hover:scale-110 transition-transform">
-              <i data-lucide="trending-up" class="w-4 h-4"></i>
+              <i data-lucide="banknote" class="w-4 h-4"></i>
             </div>
           </div>
           <div class="mt-3">
-            <div id="kpi-total-profit" class="text-2xl lg:text-3xl font-extrabold tracking-tight text-emerald-600 dark:text-emerald-400">-</div>
+            <div id="kpi-total-profit" class="text-2xl lg:text-3xl font-black tracking-tight text-emerald-600 dark:text-emerald-400">-</div>
             <div class="mt-1 flex items-center text-xs text-slate-500 dark:text-slate-400 space-x-1">
-              <span class="text-emerald-600 dark:text-emerald-400 font-semibold">Laba Bersih</span>
-              <span>setelah diskon</span>
+              <span class="text-emerald-600 dark:text-emerald-400 font-bold">Uang Bersih</span>
+              <span>setelah potong modal</span>
             </div>
           </div>
         </div>
@@ -374,15 +374,15 @@
         <!-- Card 3: Profit Margin -->
         <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 hover:border-slate-300 dark:hover:border-slate-700 transition relative overflow-hidden group shadow-sm">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Profit Margin</span>
+            <span class="text-xs font-bold text-slate-500 dark:text-slate-400">Persentase Untung</span>
             <div class="p-2 rounded-xl bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/20 group-hover:scale-110 transition-transform">
-              <i data-lucide="percent" class="w-4 h-4"></i>
+              <i data-lucide="pie-chart" class="w-4 h-4"></i>
             </div>
           </div>
           <div class="mt-3">
-            <div id="kpi-profit-margin" class="text-2xl lg:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">-</div>
+            <div id="kpi-profit-margin" class="text-2xl lg:text-3xl font-black tracking-tight text-slate-900 dark:text-white">-</div>
             <div class="mt-1 text-xs text-slate-500 dark:text-slate-400">
-              Rasio Profit / Sales
+              Dari setiap $100 yang masuk
             </div>
           </div>
         </div>
@@ -390,18 +390,18 @@
         <!-- Card 4: Total Orders & Qty -->
         <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 hover:border-slate-300 dark:hover:border-slate-700 transition relative overflow-hidden group shadow-sm">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Volume & Orders</span>
+            <span class="text-xs font-bold text-slate-500 dark:text-slate-400">Jumlah Nota & Barang</span>
             <div class="p-2 rounded-xl bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-500/20 group-hover:scale-110 transition-transform">
-              <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+              <i data-lucide="shopping-cart" class="w-4 h-4"></i>
             </div>
           </div>
           <div class="mt-3">
             <div class="flex items-baseline space-x-1">
-              <span id="kpi-total-orders" class="text-2xl lg:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">-</span>
-              <span class="text-xs text-slate-500 dark:text-slate-400">orders</span>
+              <span id="kpi-total-orders" class="text-2xl lg:text-3xl font-black tracking-tight text-slate-900 dark:text-white">-</span>
+              <span class="text-xs text-slate-500 font-semibold">kali belanja</span>
             </div>
             <div class="mt-1 text-xs text-slate-500 dark:text-slate-400">
-              <strong id="kpi-total-qty" class="text-slate-800 dark:text-slate-200">-</strong> item terjual
+              <strong id="kpi-total-qty" class="text-slate-800 dark:text-slate-200">-</strong> buah barang terjual
             </div>
           </div>
         </div>
@@ -409,15 +409,15 @@
         <!-- Card 5: AOV -->
         <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 hover:border-slate-300 dark:hover:border-slate-700 transition relative overflow-hidden group shadow-sm">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Avg. Order Value</span>
+            <span class="text-xs font-bold text-slate-500 dark:text-slate-400">Rata-rata Nota Belanja</span>
             <div class="p-2 rounded-xl bg-fuchsia-50 dark:bg-fuchsia-500/10 text-fuchsia-600 dark:text-fuchsia-400 border border-fuchsia-200 dark:border-fuchsia-500/20 group-hover:scale-110 transition-transform">
               <i data-lucide="receipt" class="w-4 h-4"></i>
             </div>
           </div>
           <div class="mt-3">
-            <div id="kpi-aov" class="text-2xl lg:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">-</div>
+            <div id="kpi-aov" class="text-2xl lg:text-3xl font-black tracking-tight text-slate-900 dark:text-white">-</div>
             <div class="mt-1 text-xs text-slate-500 dark:text-slate-400">
-              Rata-rata per transaksi
+              Rata-rata belanja tiap pembeli
             </div>
           </div>
         </div>
@@ -431,10 +431,10 @@
         <div class="lg:col-span-7 bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 flex flex-col justify-between shadow-sm">
           <div class="flex items-center justify-between mb-2">
             <div>
-              <h2 class="text-sm font-bold text-slate-900 dark:text-slate-200">Tren Penjualan & Profit Bulanan</h2>
-              <p class="text-xs text-slate-500 dark:text-slate-400">Evaluasi pertumbuhan revenue dan seasonality transaksi</p>
+              <h2 class="text-sm font-bold text-slate-900 dark:text-slate-200">Grafik Penjualan dari Bulan ke Bulan</h2>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Melihat kapan toko sedang ramai dan berapa untung bersihnya</p>
             </div>
-            <span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded-lg text-slate-600 dark:text-slate-400 text-xs font-medium">Monthly</span>
+            <span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 rounded-lg text-slate-700 dark:text-slate-300 text-xs font-bold">Tiap Bulan</span>
           </div>
           <div id="chart-trend" class="w-full"></div>
         </div>
@@ -443,10 +443,10 @@
         <div class="lg:col-span-5 bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 flex flex-col justify-between shadow-sm">
           <div class="flex items-center justify-between mb-2">
             <div>
-              <h2 class="text-sm font-bold text-slate-900 dark:text-slate-200">Top 10 Sub-Kategori Produk</h2>
-              <p class="text-xs text-slate-500 dark:text-slate-400">Perbandingan Sales vs Profit per lini produk</p>
+              <h2 class="text-sm font-bold text-slate-900 dark:text-slate-200">10 Jenis Barang Paling Laris</h2>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Bandingkan omset penjualan dan uang bersih yang dihasilkan</p>
             </div>
-            <span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded-lg text-slate-600 dark:text-slate-400 text-xs font-medium">Top 10</span>
+            <span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 rounded-lg text-slate-700 dark:text-slate-300 text-xs font-bold">Top 10</span>
           </div>
           <div id="chart-subcategory" class="w-full"></div>
         </div>
@@ -459,8 +459,8 @@
         <!-- Segment Share -->
         <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
           <div>
-            <h2 class="text-sm font-bold text-slate-900 dark:text-slate-200">Segmen Pelanggan</h2>
-            <p class="text-xs text-slate-500 dark:text-slate-400">Kontribusi revenue per segmen pembeli</p>
+            <h2 class="text-sm font-bold text-slate-900 dark:text-slate-200">Siapa Saja Pembeli Kita?</h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Porsi belanja perorangan vs kantor</p>
           </div>
           <div id="chart-segment" class="w-full my-auto"></div>
         </div>
@@ -468,8 +468,8 @@
         <!-- Regional Performance -->
         <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
           <div>
-            <h2 class="text-sm font-bold text-slate-900 dark:text-slate-200">Performa Regional</h2>
-            <p class="text-xs text-slate-500 dark:text-slate-400">Sales & Profit di 4 Region AS</p>
+            <h2 class="text-sm font-bold text-slate-900 dark:text-slate-200">Daerah Penjualan</h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Omset & untung di 4 wilayah utama</p>
           </div>
           <div id="chart-region" class="w-full my-auto"></div>
         </div>
@@ -477,8 +477,8 @@
         <!-- Discount Impact -->
         <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
           <div>
-            <h2 class="text-sm font-bold text-slate-900 dark:text-slate-200">Dampak Diskon vs Margin</h2>
-            <p class="text-xs text-slate-500 dark:text-slate-400">Sensitivitas profitabilitas terhadap diskon</p>
+            <h2 class="text-sm font-bold text-slate-900 dark:text-slate-200">Efek Diskon ke Untung</h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Melihat titik di mana diskon bikin rugi</p>
           </div>
           <div id="chart-discount" class="w-full my-auto"></div>
         </div>
@@ -486,8 +486,8 @@
         <!-- Shipping Mode -->
         <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
           <div>
-            <h2 class="text-sm font-bold text-slate-900 dark:text-slate-200">Metode Pengiriman</h2>
-            <p class="text-xs text-slate-500 dark:text-slate-400">Distribusi moda logistik pesanan</p>
+            <h2 class="text-sm font-bold text-slate-900 dark:text-slate-200">Pilihan Kurir / Kirim</h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Cara pengiriman yang dipilih pembeli</p>
           </div>
           <div id="chart-shipmode" class="w-full my-auto"></div>
         </div>
@@ -500,16 +500,16 @@
         <!-- Table Header & Search -->
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <div>
-            <h2 class="text-base font-bold text-slate-900 dark:text-slate-200">Data Explorer & Transaksi Rinci</h2>
-            <p class="text-xs text-slate-500 dark:text-slate-400">Eksplorasi transaksi dengan fitur pencarian dan pengurutan dinamis</p>
+            <h2 class="text-base font-bold text-slate-900 dark:text-slate-200">Daftar Lengkap Catatan Belanja</h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Ketik nama barang, nama pembeli, atau kota untuk mencari data langsung</p>
           </div>
 
-          <div class="w-full sm:w-72 relative">
+          <div class="w-full sm:w-80 relative">
             <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
             <input 
               type="text" 
               id="table-search" 
-              placeholder="Cari produk, customer, kota..." 
+              placeholder="Ketik nama produk, pelanggan, kota..." 
               class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-xl pl-9 pr-3 py-2 text-xs text-slate-800 dark:text-slate-200 placeholder:text-slate-400 focus:outline-none focus:border-sky-500 transition"
             />
           </div>
@@ -519,15 +519,15 @@
         <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800">
           <table class="w-full text-left border-collapse">
             <thead>
-              <tr class="bg-slate-100 dark:bg-slate-950/80 border-b border-slate-200 dark:border-slate-800 text-[11px] uppercase tracking-wider text-slate-600 dark:text-slate-400 font-semibold select-none">
-                <th class="py-3 px-4 cursor-pointer hover:text-sky-600 dark:hover:text-sky-400 transition" data-sort="orderId">Order ID</th>
+              <tr class="bg-slate-100 dark:bg-slate-950/80 border-b border-slate-200 dark:border-slate-800 text-[11px] uppercase tracking-wider text-slate-600 dark:text-slate-400 font-bold select-none">
+                <th class="py-3 px-4 cursor-pointer hover:text-sky-600 dark:hover:text-sky-400 transition" data-sort="orderId">No. Nota</th>
                 <th class="py-3 px-4 cursor-pointer hover:text-sky-600 dark:hover:text-sky-400 transition" data-sort="orderDate">Tanggal</th>
-                <th class="py-3 px-4 cursor-pointer hover:text-sky-600 dark:hover:text-sky-400 transition" data-sort="productName">Produk</th>
-                <th class="py-3 px-4 cursor-pointer hover:text-sky-600 dark:hover:text-sky-400 transition" data-sort="customerName">Pelanggan</th>
-                <th class="py-3 px-4 text-right cursor-pointer hover:text-sky-600 dark:hover:text-sky-400 transition" data-sort="sales">Sales</th>
-                <th class="py-3 px-4 text-center cursor-pointer hover:text-sky-600 dark:hover:text-sky-400 transition" data-sort="quantity">Qty</th>
+                <th class="py-3 px-4 cursor-pointer hover:text-sky-600 dark:hover:text-sky-400 transition" data-sort="productName">Nama Barang</th>
+                <th class="py-3 px-4 cursor-pointer hover:text-sky-600 dark:hover:text-sky-400 transition" data-sort="customerName">Nama Pembeli</th>
+                <th class="py-3 px-4 text-right cursor-pointer hover:text-sky-600 dark:hover:text-sky-400 transition" data-sort="sales">Harga Jual</th>
+                <th class="py-3 px-4 text-center cursor-pointer hover:text-sky-600 dark:hover:text-sky-400 transition" data-sort="quantity">Jumlah</th>
                 <th class="py-3 px-4 text-center cursor-pointer hover:text-sky-600 dark:hover:text-sky-400 transition" data-sort="discount">Diskon</th>
-                <th class="py-3 px-4 text-right cursor-pointer hover:text-sky-600 dark:hover:text-sky-400 transition" data-sort="profit">Profit</th>
+                <th class="py-3 px-4 text-right cursor-pointer hover:text-sky-600 dark:hover:text-sky-400 transition" data-sort="profit">Untung / Rugi</th>
               </tr>
             </thead>
             <tbody id="table-body" class="divide-y divide-slate-100 dark:divide-slate-800/60 font-normal">
@@ -554,12 +554,12 @@
   <footer class="border-t border-slate-200 dark:border-slate-800/80 py-6 mt-12 bg-white dark:bg-slate-950">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
       <div>
-        Superstore Executive Business Intelligence & Data Storytelling Dashboard
+        Dashboard Cerita Data Superstore
       </div>
       <div class="flex items-center space-x-4">
-        <span>⚡ 9,994 Baris Data Teranalisis</span>
+        <span>⚡ 9.994 Catatan Belanja Teranalisis</span>
         <span>•</span>
-        <span>Built with Modern Data Storytelling Arc</span>
+        <span>Bahasa Sederhana untuk Semua Kalangan</span>
       </div>
     </div>
   </footer>
