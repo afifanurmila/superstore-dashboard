@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="id" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Superstore Executive Analytics Dashboard</title>
+  
+  <!-- Plus Jakarta Sans & JetBrains Mono Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- ApexCharts -->
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+  <style>
+    /* Custom Scrollbar for Light & Dark */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    html.light ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    html.light ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    html.light ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    html.dark ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    html.dark ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+    
+    .apexcharts-tooltip {
+      border-radius: 10px !important;
+    }
+    html.light .apexcharts-tooltip {
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
+      border: 1px solid #e2e8f0 !important;
+      background: #ffffff !important;
+      color: #0f172a !important;
+    }
+    html.dark .apexcharts-tooltip {
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5) !important;
+      border: 1px solid #334155 !important;
+      background: #0f172a !important;
+      color: #f8fafc !important;
+    }
+  </style>
+</head>
+
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans min-h-screen antialiased transition-colors duration-200 selection:bg-sky-500 selection:text-white">
+
+  <!-- Header & Navigation -->
+  <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        
+        <!-- Logo & Title -->
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center shadow-md shadow-sky-500/20 ring-1 ring-white/30">
+            <i data-lucide="store" class="w-5 h-5 text-white"></i>
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <h1 class="text-base sm:text-lg font-bold tracking-tight text-slate-900 dark:text-white">
+                Superstore Analytics Pro
+              </h1>
+              <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-sky-100 dark:bg-sky-500/10 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/20">
+                Live Data
+              </span>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">Executive Sales & Profit Performance Dashboard</p>
+          </div>
+        </div>
+
+        <!-- Year Quick Preset & Theme Actions -->
+        <div class="flex items-center space-x-2 sm:space-x-3">
+          <!-- Year Presets -->
+          <div class="hidden md:flex items-center p-1 bg-slate-100 dark:bg-slate-950/80 rounded-xl border border-slate-200 dark:border-slate-800 text-xs">
+            <button data-preset-year="all" class="px-3 py-1.5 rounded-lg font-medium bg-sky-600 text-white shadow-sm transition">All Years</button>
+            <button data-preset-year="2014" class="px-3 py-1.5 rounded-lg font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition">2014</button>
+            <button data-preset-year="2015" class="px-3 py-1.5 rounded-lg font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition">2015</button>
+            <button data-preset-year="2016" class="px-3 py-1.5 rounded-lg font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition">2016</button>
+            <button data-preset-year="2017" class="px-3 py-1.5 rounded-lg font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition">2017</button>
+          </div>
+
+          <!-- Theme Toggle Button -->
+          <button id="theme-toggle" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition" title="Ganti Tema (Light / Dark)">
+            <i id="theme-icon" data-lucide="moon" class="w-4 h-4"></i>
+          </button>
+
+          <!-- Export CSV -->
+          <button id="btn-export-csv" class="inline-flex items-center space-x-2 px-3.5 py-2 text-xs font-semibold rounded-xl bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition shadow-sm">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i>
+            <span class="hidden sm:inline">Export CSV</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+    <!-- Filter Toolbar -->
+    <section class="bg-white dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-4 sm:p-5 shadow-sm">
+      <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+        
+        <div class="flex items-center space-x-2 text-sm font-semibold text-slate-800 dark:text-slate-300">
+          <i data-lucide="sliders-horizontal" class="w-4 h-4 text-sky-600 dark:text-sky-400"></i>
+          <span>Filter Data</span>
+          <span id="active-filter-badge" class="hidden text-[11px] px-2 py-0.5 rounded-full bg-sky-100 dark:bg-sky-500/20 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-500/30">
+            0 filter aktif
+          </span>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 w-full lg:w-auto">
+          
+          <!-- Year Select -->
+          <div>
+            <label class="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">Tahun Order</label>
+            <select id="filter-year" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-sky-500 transition">
+              <option value="all">Semua Tahun</option>
+              <option value="2014">2014</option>
+              <option value="2015">2015</option>
+              <option value="2016">2016</option>
+              <option value="2017">2017</option>
+            </select>
+          </div>
+
+          <!-- Region Select -->
+          <div>
+            <label class="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">Wilayah / Region</label>
+            <select id="filter-region" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-sky-500 transition">
+              <option value="all">Semua Region</option>
+              <option value="Central">Central</option>
+              <option value="East">East</option>
+              <option value="South">South</option>
+              <option value="West">West</option>
+            </select>
+          </div>
+
+          <!-- Segment Select -->
+          <div>
+            <label class="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">Segmen Customer</label>
+            <select id="filter-segment" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-sky-500 transition">
+              <option value="all">Semua Segmen</option>
+              <option value="Consumer">Consumer</option>
+              <option value="Corporate">Corporate</option>
+              <option value="Home Office">Home Office</option>
+            </select>
+          </div>
+
+          <!-- Category Select -->
+          <div>
+            <label class="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">Kategori Produk</label>
+            <select id="filter-category" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-sky-500 transition">
+              <option value="all">Semua Kategori</option>
+              <option value="Furniture">Furniture</option>
+              <option value="Office Supplies">Office Supplies</option>
+              <option value="Technology">Technology</option>
+            </select>
+          </div>
+
+          <!-- Reset Button -->
+          <div class="col-span-2 sm:col-span-1 flex items-end">
+            <button id="btn-reset-filters" class="w-full inline-flex items-center justify-center space-x-1.5 px-3 py-2 text-xs font-semibold rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 transition">
+              <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+              <span>Reset Filter</span>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Smart Insight Banner -->
+    <section class="bg-gradient-to-r from-sky-50 via-indigo-50 to-slate-50 dark:from-sky-950/40 dark:via-indigo-950/30 dark:to-slate-900 border border-sky-200 dark:border-sky-500/20 rounded-2xl p-4 flex items-start space-x-3 shadow-sm">
+      <div class="p-2 bg-sky-500/15 rounded-xl text-sky-600 dark:text-sky-400 shrink-0 mt-0.5 border border-sky-300 dark:border-sky-500/20">
+        <i data-lucide="sparkles" class="w-4 h-4"></i>
+      </div>
+      <div id="ai-insight-text" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+        Memuat analisis ringkas...
+      </div>
+    </section>
+
+    <!-- KPI Scorecards Grid -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+      
+      <!-- Card 1: Total Sales -->
+      <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 hover:border-slate-300 dark:hover:border-slate-700 transition relative overflow-hidden group shadow-sm">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Total Revenue (Sales)</span>
+          <div class="p-2 rounded-xl bg-sky-50 dark:bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-200 dark:border-sky-500/20 group-hover:scale-110 transition-transform">
+            <i data-lucide="dollar-sign" class="w-4 h-4"></i>
+          </div>
+        </div>
+        <div class="mt-3">
+          <div id="kpi-total-sales" class="text-2xl lg:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">-</div>
+          <div class="mt-1 flex items-center text-xs text-slate-500 dark:text-slate-400 space-x-1">
+            <span class="text-sky-600 dark:text-sky-400 font-semibold">Omset Kotor</span>
+            <span>seluruh transaksi</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Total Net Profit -->
+      <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 hover:border-slate-300 dark:hover:border-slate-700 transition relative overflow-hidden group shadow-sm">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Total Net Profit</span>
+          <div class="p-2 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20 group-hover:scale-110 transition-transform">
+            <i data-lucide="trending-up" class="w-4 h-4"></i>
+          </div>
+        </div>
+        <div class="mt-3">
+          <div id="kpi-total-profit" class="text-2xl lg:text-3xl font-extrabold tracking-tight text-emerald-600 dark:text-emerald-400">-</div>
+          <div class="mt-1 flex items-center text-xs text-slate-500 dark:text-slate-400 space-x-1">
+            <span class="text-emerald-600 dark:text-emerald-400 font-semibold">Laba Bersih</span>
+            <span>setelah diskon</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Profit Margin -->
+      <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 hover:border-slate-300 dark:hover:border-slate-700 transition relative overflow-hidden group shadow-sm">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Profit Margin</span>
+          <div class="p-2 rounded-xl bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/20 group-hover:scale-110 transition-transform">
+            <i data-lucide="percent" class="w-4 h-4"></i>
+          </div>
+        </div>
+        <div class="mt-3">
+          <div id="kpi-profit-margin" class="text-2xl lg:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">-</div>
+          <div class="mt-1 text-xs text-slate-500 dark:text-slate-400">
+            Rasio Profit / Sales
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: Total Orders & Qty -->
+      <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 hover:border-slate-300 dark:hover:border-slate-700 transition relative overflow-hidden group shadow-sm">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Volume & Orders</span>
+          <div class="p-2 rounded-xl bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-500/20 group-hover:scale-110 transition-transform">
+            <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+          </div>
+        </div>
+        <div class="mt-3">
+          <div class="flex items-baseline space-x-1">
+            <span id="kpi-total-orders" class="text-2xl lg:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">-</span>
+            <span class="text-xs text-slate-500 dark:text-slate-400">orders</span>
+          </div>
+          <div class="mt-1 text-xs text-slate-500 dark:text-slate-400">
+            <strong id="kpi-total-qty" class="text-slate-800 dark:text-slate-200">-</strong> item terjual
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5: AOV -->
+      <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 hover:border-slate-300 dark:hover:border-slate-700 transition relative overflow-hidden group shadow-sm">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Avg. Order Value</span>
+          <div class="p-2 rounded-xl bg-fuchsia-50 dark:bg-fuchsia-500/10 text-fuchsia-600 dark:text-fuchsia-400 border border-fuchsia-200 dark:border-fuchsia-500/20 group-hover:scale-110 transition-transform">
+            <i data-lucide="receipt" class="w-4 h-4"></i>
+          </div>
+        </div>
+        <div class="mt-3">
+          <div id="kpi-aov" class="text-2xl lg:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">-</div>
+          <div class="mt-1 text-xs text-slate-500 dark:text-slate-400">
+            Rata-rata per transaksi
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Charts Row 1: Time Series Trend & Sub-Category Performance -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      
+      <!-- Time Series Chart (7 cols) -->
+      <div class="lg:col-span-7 bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 flex flex-col justify-between shadow-sm">
+        <div class="flex items-center justify-between mb-2">
+          <div>
+            <h2 class="text-sm font-bold text-slate-900 dark:text-slate-200">Tren Penjualan & Profit Bulanan</h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Evaluasi pertumbuhan revenue dan seasonality transaksi</p>
+          </div>
+          <span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded-lg text-slate-600 dark:text-slate-400 text-xs font-medium">Monthly</span>
+        </div>
+        <div id="chart-trend" class="w-full"></div>
+      </div>
+
+      <!-- Sub-Category Bar Chart (5 cols) -->
+      <div class="lg:col-span-5 bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 flex flex-col justify-between shadow-sm">
+        <div class="flex items-center justify-between mb-2">
+          <div>
+            <h2 class="text-sm font-bold text-slate-900 dark:text-slate-200">Top 10 Sub-Kategori Produk</h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Perbandingan Sales vs Profit per lini produk</p>
+          </div>
+          <span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded-lg text-slate-600 dark:text-slate-400 text-xs font-medium">Top 10</span>
+        </div>
+        <div id="chart-subcategory" class="w-full"></div>
+      </div>
+
+    </section>
+
+    <!-- Charts Row 2: Segments, Regional, Discount Risk, Logistics -->
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      
+      <!-- Segment Share -->
+      <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
+        <div>
+          <h2 class="text-sm font-bold text-slate-900 dark:text-slate-200">Segmen Pelanggan</h2>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Kontribusi revenue per segmen pembeli</p>
+        </div>
+        <div id="chart-segment" class="w-full my-auto"></div>
+      </div>
+
+      <!-- Regional Performance -->
+      <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
+        <div>
+          <h2 class="text-sm font-bold text-slate-900 dark:text-slate-200">Performa Regional</h2>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Sales & Profit di 4 Region AS</p>
+        </div>
+        <div id="chart-region" class="w-full my-auto"></div>
+      </div>
+
+      <!-- Discount Impact -->
+      <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
+        <div>
+          <h2 class="text-sm font-bold text-slate-900 dark:text-slate-200">Dampak Diskon vs Margin</h2>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Sensitivitas profitabilitas terhadap diskon</p>
+        </div>
+        <div id="chart-discount" class="w-full my-auto"></div>
+      </div>
+
+      <!-- Shipping Mode -->
+      <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
+        <div>
+          <h2 class="text-sm font-bold text-slate-900 dark:text-slate-200">Metode Pengiriman</h2>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Distribusi moda logistik pesanan</p>
+        </div>
+        <div id="chart-shipmode" class="w-full my-auto"></div>
+      </div>
+
+    </section>
+
+    <!-- Data Explorer Table Section -->
+    <section class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm space-y-4">
+      
+      <!-- Table Header & Search -->
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div>
+          <h2 class="text-base font-bold text-slate-900 dark:text-slate-200">Data Explorer & Transaksi Rinci</h2>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Eksplorasi transaksi dengan fitur pencarian dan pengurutan dinamis</p>
+        </div>
+
+        <div class="w-full sm:w-72 relative">
+          <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+          <input 
+            type="text" 
+            id="table-search" 
+            placeholder="Cari produk, customer, kota..." 
+            class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-xl pl-9 pr-3 py-2 text-xs text-slate-800 dark:text-slate-200 placeholder:text-slate-400 focus:outline-none focus:border-sky-500 transition"
+          />
+        </div>
+      </div>
+
+      <!-- Table Container -->
+      <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-slate-100 dark:bg-slate-950/80 border-b border-slate-200 dark:border-slate-800 text-[11px] uppercase tracking-wider text-slate-600 dark:text-slate-400 font-semibold select-none">
+              <th class="py-3 px-4 cursor-pointer hover:text-sky-600 dark:hover:text-sky-400 transition" data-sort="orderId">Order ID</th>
+              <th class="py-3 px-4 cursor-pointer hover:text-sky-600 dark:hover:text-sky-400 transition" data-sort="orderDate">Tanggal</th>
+              <th class="py-3 px-4 cursor-pointer hover:text-sky-600 dark:hover:text-sky-400 transition" data-sort="productName">Produk</th>
+              <th class="py-3 px-4 cursor-pointer hover:text-sky-600 dark:hover:text-sky-400 transition" data-sort="customerName">Pelanggan</th>
+              <th class="py-3 px-4 text-right cursor-pointer hover:text-sky-600 dark:hover:text-sky-400 transition" data-sort="sales">Sales</th>
+              <th class="py-3 px-4 text-center cursor-pointer hover:text-sky-600 dark:hover:text-sky-400 transition" data-sort="quantity">Qty</th>
+              <th class="py-3 px-4 text-center cursor-pointer hover:text-sky-600 dark:hover:text-sky-400 transition" data-sort="discount">Diskon</th>
+              <th class="py-3 px-4 text-right cursor-pointer hover:text-sky-600 dark:hover:text-sky-400 transition" data-sort="profit">Profit</th>
+            </tr>
+          </thead>
+          <tbody id="table-body" class="divide-y divide-slate-100 dark:divide-slate-800/60 font-normal">
+            <!-- Populated via app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Table Footer & Pagination -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
+        <span id="table-info" class="text-xs text-slate-500 dark:text-slate-400">Menampilkan data...</span>
+        <div id="table-pagination" class="flex items-center space-x-2">
+          <!-- Pagination Buttons -->
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 dark:border-slate-800/80 py-6 mt-12 bg-white dark:bg-slate-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+      <div>
+        Superstore Retail Business Intelligence Dashboard
+      </div>
+      <div class="flex items-center space-x-4">
+        <span>⚡ 9,994 Baris Data Teranalisis</span>
+        <span>•</span>
+        <span>Dibuat dengan Modern Web Stack</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Load Data & Application Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
